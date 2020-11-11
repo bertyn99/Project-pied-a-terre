@@ -9,4 +9,7 @@ class users {
         this.favoris.push(magasin)
     }
 
+    addToStorage() {//ajout au local storage
+
+    }
 }
