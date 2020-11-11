@@ -15,4 +15,7 @@ class Users {
     getLocalisation() {
 
     }
+    nearbySearch() {
+
+    }
 }

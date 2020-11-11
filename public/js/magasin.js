@@ -18,7 +18,7 @@ class Magasin {
 
     }
 
-    getInfoMagasin() {
+    getDetails() {
 
     }
 
