@@ -1,0 +1,24 @@
+{
+  "name": "pied_a_terre",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bertyn99/Project-pied-a-terre.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bertyn99/Project-pied-a-terre/issues"
+  },
+  "homepage": "https://github.com/bertyn99/Project-pied-a-terre#readme",
+  "dependencies": {
+    "autoprefixer": "^10.0.2",
+    "postcss-cli": "^8.2.0",
+    "tailwindcss": "^1.9.6"
+  }
+}
