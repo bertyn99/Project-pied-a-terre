@@ -10,12 +10,16 @@ class Users {
     }
 
     addToStorage() {//ajout au local storage
-
+        localStorage.setItem('favoris', JSON.stringify(this.favoris));
     }
     getLocalisation() {
 
     }
     nearbySearch() {
 
+    }
+    getStorage() {
+        let favorisString = localStorage.getItem("favoris");
+        this.favoris = JSON.parse(favorisString);
     }
 }
