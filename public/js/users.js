@@ -1,6 +1,5 @@
-class Users {
-    constructor(name, position) {
-        this.name = name;
+module.exports = class Users {
+    constructor(position) {
         this.position = position;
         this.favoris = []//stock l'id des magasin qu'il aime
     }

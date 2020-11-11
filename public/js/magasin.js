@@ -1,5 +1,5 @@
 import Commentaire from "./Commentaire";
-class Magasin {
+module.exports = class Magasin {
     constructor(nom, addresse) {
         this.nom = nom;
         this.addresse = addresse;
