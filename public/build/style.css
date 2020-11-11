@@ -21637,7 +21637,7 @@ video {
           animation: bounce 1s infinite;
 }
 
-.list{
+.list-container{
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   --bg-opacity: 1;
@@ -21648,7 +21648,7 @@ video {
   padding: 0.25rem
 }
 
-.cardList{
+.card-container{
   height: 6rem;
   width: 12rem;
   border-radius: 0.25rem;
