@@ -1,4 +1,4 @@
-class users {
+class Users {
     constructor(name, position) {
         this.name = name;
         this.position = position;
@@ -10,6 +10,9 @@ class users {
     }
 
     addToStorage() {//ajout au local storage
+
+    }
+    getLocalisation() {
 
     }
 }
