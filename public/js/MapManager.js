@@ -1,4 +1,4 @@
-module.exports = class MagasinManager {
+module.exports = class MapManager {
     constructor() {
         this.magasins = [];
         this._viewContainer = document.querySelector("main");
@@ -8,6 +8,11 @@ module.exports = class MagasinManager {
         this._viewContainer.innerHTML = "";
         this._viewContainer.appendChild(dom);
     }
+
+    load(element) {
+
+    }
+
 
     getMagasinList() {//charge la liste de magasin
 
