@@ -1,9 +1,11 @@
 import MapManager from './MapManager.js'
+import Users from './Users.js'
 export default class ViewManager {
     constructor() {
         this.magasins = [];
         this._viewContainer = document.querySelector("#main");
         this.map = new MapManager()
+        this.user = new Users()
     }
 
     set view(dom) {
@@ -13,18 +15,22 @@ export default class ViewManager {
 
 
     showMap(elem) {
-        const mapView = document.querySelector("#tempmap").content.cloneNode(true);
-        let divMap = mapView.querySelector('#map');
-
-        this.map.loadScriptMap("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places").then(() => {
-            let sydney = new google.maps.LatLng(-33.867, 151.195);
-            // The map, centered at Uluru
-            let googlemap = new google.maps.Map(divMap, { zoom: 15, center: sydney });
-
+        let gmap = this.map.loadMap()
+        this.user.getLocalisation().then((position) => {
+            this.user.position = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            }
+            console.log(center);
         })
-        this.view = divMap
-
+            .catch((err) => {
+                console.error(err.message);
+            });
+        this.map.centerMap()
+        this.view = gmap
     }
+
+
     showList() {
         const listTemplate = document.querySelector("#card-list").content.cloneNode(true);
         const itemList = document.querySelector("#card").content.cloneNode(true);

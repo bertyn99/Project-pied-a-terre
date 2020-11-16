@@ -1,6 +1,6 @@
 export default class Users {
-    constructor(position) {
-        this.position = position;
+    constructor() {
+        this.position = null;
         this.favoris = []//stock l'id des magasin qu'il aime
     }
 
@@ -12,8 +12,12 @@ export default class Users {
         localStorage.setItem('favoris', JSON.stringify(this.favoris));
     }
     getLocalisation() {
-
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
     }
+
+
     nearbySearch() {
 
     }
