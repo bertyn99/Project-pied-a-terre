@@ -1,8 +1,9 @@
-
-class ViewManager {
+import MapManager from './MapManager.js'
+export default class ViewManager {
     constructor() {
         this.magasins = [];
         this._viewContainer = document.querySelector("#main");
+        this.map = new MapManager()
     }
 
     set view(dom) {
@@ -10,25 +11,15 @@ class ViewManager {
         this._viewContainer.appendChild(dom);
     }
 
-    loadScriptMap(src) {
-        return new Promise((resolve, reject) => {
-            let script = document.createElement('script');
-            script.src = src;
 
-            script.onload = () => resolve(script);
-
-            document.head.append(script);
-        })
-
-    }
     showMap(elem) {
         const mapView = document.querySelector("#tempmap").content.cloneNode(true);
         let divMap = mapView.querySelector('#map');
 
-        this.loadScriptMap("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places").then(() => {
+        this.map.loadScriptMap("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places").then(() => {
             let sydney = new google.maps.LatLng(-33.867, 151.195);
             // The map, centered at Uluru
-            let map = new google.maps.Map(divMap, { zoom: 15, center: sydney });
+            let googlemap = new google.maps.Map(divMap, { zoom: 15, center: sydney });
 
         })
         this.view = divMap
@@ -62,3 +53,5 @@ class ViewManager {
         })
     }
 }
+
+console.log('veiw')

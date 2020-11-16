@@ -1,4 +1,4 @@
-
+import ViewManager from './ViewManager.js'
 
 let navbarItem = document.querySelectorAll('li');
 
