@@ -23,14 +23,14 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Store</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Account</a></li>
+                        <li><a data-view="Accueil" href="#">Home</a></li>
+                        <li><a data-view="Map" href="#">Map</a></li>
+                        <li><a data-view="About" href="#">About</a></li>
+                        <li><a data-view="favoris" href="#">Favoris</a></li>
                     </ul>
                 </nav>
             </div>
-            <div class="row">
+            <!-- <div class="row"> mis en commentaire le temps que je finisse de faire les test des script
                 <div class="col-2">
                     <h1>Some people need a high five<br>in the face with a chair.</h1>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, tenetur.</p>
@@ -39,18 +39,18 @@
                 <div class="col-2">
                     <img src="./assets/slide1.png" alt="">
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <section id="main">
 
-        <div id="map">
-            deer
-        </div>
+
     </section>
 
-    <template id=" tempmap">
+    <template id="tempmap">
+        <div id="map">
 
+        </div>
 
     </template>
     <template id="magasinView">
@@ -60,14 +60,14 @@
 
     </template>
     <template id="card-list">
-        <section id="magasinList">
+        <div id="magasinList">
             <div class="w-10/12 mx-auto">
                 <div class="list-container">
 
                 </div>
             </div>
 
-        </section>
+        </div>
     </template>
     <template id="card">
         <div class="card-container">
@@ -79,8 +79,8 @@
                 <div class="card-footer-address"></div>
             </div>
     </template>
-    <script src="js/lib.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <script src="js/ViewManager.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
