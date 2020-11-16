@@ -19,7 +19,7 @@ class Mapmanager {
               let map = new google.maps.Map(elem, { zoom: 15, center: sydney });
   
           }) */
-        loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places", (params) => {
+        loadScript("https://maps.googleapis.com/maps/api/js?key=&libraries=places", (params) => {
             let sydney = new google.maps.LatLng(-33.867, 151.195);
             // The map, centered at Uluru
             let map = new google.maps.Map(elem, { zoom: 15, center: sydney });
