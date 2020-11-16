@@ -1,20 +1,32 @@
-import Users from './Users'
 
 let divMap = document.querySelector('#map');
 
+function loadScript(src, callback) {
+    let script = document.createElement('script');
+    script.src = src;
 
+    script.onload = () => callback(script);
+
+    document.head.append(script);
+}
 class Mapmanager {
 
 
     load(elem) {
-        $script("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places", (params) => {
+        /*   $script("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places", (params) => {
+              let sydney = new google.maps.LatLng(-33.867, 151.195);
+              // The map, centered at Uluru
+              let map = new google.maps.Map(elem, { zoom: 15, center: sydney });
+  
+          }) */
+        loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places", (params) => {
             let sydney = new google.maps.LatLng(-33.867, 151.195);
             // The map, centered at Uluru
             let map = new google.maps.Map(elem, { zoom: 15, center: sydney });
 
         })
     }
-    addMarker
+
 
 }
 
@@ -48,5 +60,5 @@ if (divMap != null) {
         }
     });
 } */
-let scriptmap = document.querySelector('script')
-scriptmap.onload()
+/* let scriptmap = document.querySelector('script')
+scriptmap.onload() */
