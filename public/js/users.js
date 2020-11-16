@@ -1,4 +1,4 @@
-module.exports = class Users {
+export default class Users {
     constructor(position) {
         this.position = position;
         this.favoris = []//stock l'id des magasin qu'il aime

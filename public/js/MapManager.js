@@ -9,10 +9,20 @@ module.exports = class MapManager {
         this._viewContainer.appendChild(dom);
     }
 
-    load(element) {
+    load() {
+        let userCoord = { lat: -25.363, lng: 131.044 };
+        let map = new google.maps.Map(document.querySelector('.carte'), {
+            center: userCoord,
+            zoom: 10
+        });
 
     }
 
+    showMap() {
+        const mapView = document.querySelector("#tempmap").content.cloneNode(true);
+
+        this.view = mapView;
+    }
 
     getMagasinList() {//charge la liste de magasin
 

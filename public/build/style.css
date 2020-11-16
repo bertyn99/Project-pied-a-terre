@@ -21637,6 +21637,14 @@ video {
           animation: bounce 1s infinite;
 }
 
+.h-278 {
+  height: 36rem;
+}
+
+.w-278 {
+  width:50rem;
+}
+
 .list-container{
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -21677,6 +21685,33 @@ video {
 .card-footer{
   height: 2rem;
   padding: 0.25rem
+}
+
+.card-footer-title{
+  --text-opacity: 1;
+  color: #e2e8f0;
+  color: rgba(226, 232, 240, var(--text-opacity));
+  font-weight: 700;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem
+}
+
+.card-footer-address{
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+  font-weight: 700;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem
+}
+
+#map{
+  height: 36rem;
+  width:50rem;
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
+  margin: auto
 }
 
 @media (min-width: 640px) {

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .h-278 {
+    height: 36rem;
+  }
+  .w-278 {
+      width:50rem;
+  }
+}
 .list-container{
   @apply grid grid-cols-4  bg-gray-300 gap-2 p-1 
 }
@@ -23,8 +31,11 @@
 }
 
 .card-footer-title{
-    @apply text-gray-300 text-md font-bold mx-2
+    @apply text-gray-300 font-bold mx-2
 }
 .card-footer-address{
-    @apply text-gray-700 text-md font-bold mx-2
+    @apply text-gray-700 font-bold mx-2
+}
+#map{
+    @apply h-278 w-278 bg-gray-200 m-auto
 }
