@@ -70,7 +70,9 @@ p {
     border-radius: 30px;
 }
 
-
+.header {
+    background: radial-gradient(#fff,#ffd6d6);
+}
 
 
 
