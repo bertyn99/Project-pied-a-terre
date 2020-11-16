@@ -40,10 +40,6 @@ p {
     padding-left: 25px;
     padding-right: 25px;
 }
-h1{
-    font-size: 50px;
-    font-weight: bold;
-}
 .row{
     display: flex;
     align-items: center;
@@ -58,3 +54,26 @@ h1{
     max-width: 100;
     padding: 50px 0;
 }
+.col-2 h1 {
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 60px;
+    margin: 25px 0;
+}
+
+.btn {
+    display: inline-block;
+    background: #ff523b;
+    color: white;
+    padding: 8px 30px;
+    margin: 30px;
+    border-radius: 30px;
+}
+
+
+
+
+
+
+
+
