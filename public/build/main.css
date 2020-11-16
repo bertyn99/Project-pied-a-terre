@@ -41,6 +41,20 @@ p {
     padding-right: 25px;
 }
 h1{
-    font-size: 20px;
+    font-size: 50px;
     font-weight: bold;
+}
+.row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+}
+.col-2 img {
+    max-width: 100;
+    padding: 50px 0;
 }
