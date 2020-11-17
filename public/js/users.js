@@ -1,6 +1,6 @@
 export default class Users {
     constructor() {
-        this.position = null;
+        this.position = { lat: 0, lng: 0 };
         this.favoris = []//stock l'id des magasin qu'il aime
     }
 

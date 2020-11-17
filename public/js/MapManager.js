@@ -16,15 +16,16 @@ export default class MapManager {
         })
     }
 
-    loadMap() {
+    loadMap(center) {
         const mapView = document.querySelector("#tempmap").content.cloneNode(true);
         let divMap = mapView.querySelector('#map');
 
         this.loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places").then(() => {
             let infowindow = new google.maps.InfoWindow();
-            let sydney = new google.maps.LatLng(-33.867, 151.195);
+            console.log(center)
+            let point = new google.maps.LatLng(center.lat, center.lng);
             // The map, centered at Uluru
-            this.gmap = new google.maps.Map(divMap, { zoom: 15, center: sydney });
+            this.gmap = new google.maps.Map(divMap, { zoom: 15, center: point });
             this.bounds = new google.maps.LatLngBounds
         })
         return divMap

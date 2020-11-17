@@ -15,17 +15,20 @@ export default class ViewManager {
 
 
     showMap(elem) {
-        let gmap = this.map.loadMap()
+        let gmap;
         this.user.getLocalisation().then((position) => {
-            this.user.position = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            }
-            console.log(center);
+            this.user.position.lat = position.coords.latitude;
+            this.user.position.lng = position.coords.longitude;
+
+
+            console.log(this.user.position)
         })
             .catch((err) => {
+                //alert()
                 console.error(err.message);
             });
+        console.log(this.user.position)
+        gmap = this.map.loadMap(this.user.position)
         this.map.centerMap()
         this.view = gmap
     }
