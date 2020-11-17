@@ -1,3 +1,4 @@
+
 export default class MapManager {
     constructor() {
         this.gmap = null
@@ -24,9 +25,16 @@ export default class MapManager {
             let infowindow = new google.maps.InfoWindow();
             console.log(center)
             let point = new google.maps.LatLng(center.lat, center.lng);
+
+            this.place(point).then((d) => {
+                console.log(d);
+                this.gmap = new google.maps.Map(divMap, { zoom: 15, center: point });
+                this.bounds = new google.maps.LatLngBounds
+            }).catch((err) => {
+                console.error(err);
+            })
             // The map, centered at Uluru
-            this.gmap = new google.maps.Map(divMap, { zoom: 15, center: point });
-            this.bounds = new google.maps.LatLngBounds
+
         })
         return divMap
 
@@ -45,6 +53,24 @@ export default class MapManager {
         });
     }
 
+    async place(position) {
+
+
+        let request = {
+            location: position,
+            radius: '500',
+            type: ['shoe_store']
+        };
+
+        let service = new google.maps.places.PlacesService(map);
+        return new Promise((resolve, reject) => {
+            service.nearbySearch(request, (dat, err) => {
+                if (dat) return resolve(dat)
+
+                reject(err)
+            });
+        })
+    }
     centerMap() {
         /*   this.gmap.panToBounds(this.bounds)
           this.gmap.fitBounds(this.bounds) */
