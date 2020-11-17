@@ -19,9 +19,7 @@ export default class ViewManager {
         this.user.getLocalisation().then((position) => {
             this.user.position.lat = position.coords.latitude;
             this.user.position.lng = position.coords.longitude;
-
-
-            console.log(this.user.position)
+            console.log(position)
         })
             .catch((err) => {
                 //alert()

@@ -13,10 +13,21 @@ export default class Users {
     }
     getLocalisation() {
         return new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject);
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+                enableHighAccuracy: true,
+                timeout: 5000
+            });
         });
     }
 
+    watchLocalisation() {// utilisateur se deplace
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.watchPosition(resolve, reject, {
+                enableHighAccuracy: true,
+                timeout: 5000
+            });
+        });
+    }
 
     nearbySearch() {
 
