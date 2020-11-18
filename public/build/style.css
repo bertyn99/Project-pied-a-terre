@@ -21678,12 +21678,19 @@ video {
 }
 
 .card-Titre{
+  width: 50%
 }
 
 .card-Distance{
+  width: 16.666667%
 }
 
-.card-Distance{
+.card-Favoris{
+  width: 16.666667%
+}
+
+.card-Note{
+  width: 16.666667%
 }
 
 #map{

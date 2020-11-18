@@ -15,9 +15,9 @@
 }
 
 .card-container{
-    @apply h-24 w-full rounded shadow  overflow-hidden bg-purple-400 flex rounded flex-row justify-evenly text-gray-300 font-bold py-8
+    @apply h-24 w-full rounded shadow  overflow-hidden bg-purple-400 flex rounded flex-row text-gray-300 font-bold py-8
 }
-
+.
 .card-Titre{
     @apply 
 }
