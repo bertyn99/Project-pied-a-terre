@@ -1,8 +1,9 @@
 
 export default class MapManager {
     constructor() {
-        this.gmap = null
-        this.bounds = null
+        this.gmap = null;
+        this.bounds = null;
+        this.store = [];
     }
 
 
@@ -25,13 +26,16 @@ export default class MapManager {
             let infowindow = new google.maps.InfoWindow();
             console.log(center)
             let point = new google.maps.LatLng(center.lat, center.lng);
-
+            this.gmap = new google.maps.Map(divMap, { zoom: 14, center: point });
+            this.bounds = new google.maps.LatLngBounds
             this.place(point).then((d) => {
-                console.log(d);
-                this.gmap = new google.maps.Map(divMap, { zoom: 15, center: point });
-                this.bounds = new google.maps.LatLngBounds
-            }).catch((err) => {
-                console.error(err);
+
+
+                d.forEach(store => {
+                    this.addMarker(store)
+                });
+
+
             })
             // The map, centered at Uluru
 
@@ -43,14 +47,15 @@ export default class MapManager {
     addMarker(place) {
         let point = place.geometry.location
         const marker = new google.maps.Marker({
-            map,
+            map: this.gmap,
             position: point,
         });
         this.bounds.extend(point)
         google.maps.event.addListener(marker, "click", () => {
             infowindow.setContent(place.name);
-            infowindow.open(map);
+            infowindow.open(this.gmap);
         });
+        this.centerMap()
     }
 
     async place(position) {
@@ -58,7 +63,7 @@ export default class MapManager {
 
         let request = {
             location: position,
-            radius: '500',
+            radius: '600',
             type: ['shoe_store']
         };
 
@@ -71,9 +76,19 @@ export default class MapManager {
             });
         })
     }
+    getStore(position) {
+        this.place(position).then((d) => {
+            d.forEach(elm => {
+                this.store.push(elm)
+            })
+
+        }).catch((err) => {
+            console.error(err);
+        })
+    }
     centerMap() {
-        /*   this.gmap.panToBounds(this.bounds)
-          this.gmap.fitBounds(this.bounds) */
+        /*  this.gmap.panToBounds(this.bounds) */
+        this.gmap.fitBounds(this.bounds)
     }
 
 
