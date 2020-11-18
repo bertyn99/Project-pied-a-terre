@@ -21647,7 +21647,7 @@ video {
 
 .list-container{
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   --bg-opacity: 1;
   background-color: #e2e8f0;
   background-color: rgba(226, 232, 240, var(--bg-opacity));
@@ -21658,51 +21658,32 @@ video {
 
 .card-container{
   height: 6rem;
-  width: 12rem;
+  width: 100%;
   border-radius: 0.25rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin: 0.5rem;
-  overflow: hidden
-}
-
-.card-header{
-  height: 4rem;
+  overflow: hidden;
   --bg-opacity: 1;
   background-color: #b794f4;
   background-color: rgba(183, 148, 244, var(--bg-opacity));
-  padding: 0.25rem
-}
-
-.card-header-img{
-  --text-opacity: 1;
-  color: #cbd5e0;
-  color: rgba(203, 213, 224, var(--text-opacity));
-  font-weight: 700;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem
-}
-
-.card-footer{
-  height: 2rem;
-  padding: 0.25rem
-}
-
-.card-footer-title{
+  display: flex;
+  border-radius: 0.25rem;
+  flex-direction: row;
+  justify-content: space-evenly;
   --text-opacity: 1;
   color: #e2e8f0;
   color: rgba(226, 232, 240, var(--text-opacity));
   font-weight: 700;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem
+  padding-top: 2rem;
+  padding-bottom: 2rem
 }
 
-.card-footer-address{
-  --text-opacity: 1;
-  color: #4a5568;
-  color: rgba(74, 85, 104, var(--text-opacity));
-  font-weight: 700;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem
+.card-Titre{
+}
+
+.card-Distance{
+}
+
+.card-Distance{
 }
 
 #map{

@@ -11,31 +11,27 @@
   }
 }
 .list-container{
-  @apply grid grid-cols-4  bg-gray-300 gap-2 p-1 
+  @apply grid grid-cols-1 bg-gray-300 gap-2 p-1 
 }
 
 .card-container{
-    @apply h-24 w-48 rounded shadow m-2 overflow-hidden
+    @apply h-24 w-full rounded shadow  overflow-hidden bg-purple-400 flex rounded flex-row justify-evenly text-gray-300 font-bold py-8
 }
 
-.card-header{
-    @apply h-16 bg-purple-400 p-1
+.card-Titre{
+    @apply 
+}
+.card-Distance{
+    @apply  
+}
+.card-Favoris{
+    @apply  
+}
+.card-Note{
+    @apply 
 }
 
-.card-header-img{
-    @apply text-gray-400 font-bold mx-2
-}
 
-.card-footer{
-    @apply h-8 p-1
-}
-
-.card-footer-title{
-    @apply text-gray-300 font-bold mx-2
-}
-.card-footer-address{
-    @apply text-gray-700 font-bold mx-2
-}
 #map{
     @apply h-278 w-278 bg-gray-200 m-auto
 }

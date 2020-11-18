@@ -1,20 +1,49 @@
-import MapManager from './MapManager.js'
+import MapManager from './MapManager.js';
 import Users from './Users.js'
 export default class ViewManager {
     constructor() {
-        this._viewContainer = document.querySelector("#main");
-        this.map = new MapManager()
+        this.map = new MapManager();
         this.user = new Users()
-    }
-
-    set view(dom) {
-        this._viewContainer.innerHTML = "";
-        this._viewContainer.appendChild(dom);
+        this.store = [];
     }
 
     async init() {
         await this.map.loadMap(this.user.position)
-        await console.log(this.map.getStore(this.user.position))
+        this.showMap()
+    }
+    set view(nbr) {
+        if (nbr == 1) {
+            document.querySelector("#tempmap").hidden = true
+            document.querySelector("#magasinList").hidden = false
+        } else if (nbr == 2) {
+            document.querySelector("#tempmap").hidden = false
+            document.querySelector("#magasinList").hidden = true
+        }
+
+    }
+    showMap() {
+        this.view = 2
+
+    }
+    showList() {
+        this.view = 1
+        console.log(this.map.store);
+        let list = document.querySelector('.list-container');
+
+
+        this.map.store.forEach((elem) => {
+            const itemList = document.querySelector("#card").content.cloneNode(true);
+            itemList.querySelector(".card-Titre").textContent = elem.name
+            itemList.querySelector(".card-Distance").textContent = 'non'
+            itemList.querySelector(".card-Favoris").textContent = 'non'
+            itemList.querySelector(".card-Note").textContent = `1/5`
+            list.appendChild(itemList)
+        })
+
+
+
+
+
     }
     setPosition() {
         this.user.getLocalisation().then((position) => {
@@ -28,34 +57,6 @@ export default class ViewManager {
                 console.error(err.message);
             });
     }
-    showMap(elem) {
-
-        let gmap = this.map.gmap;
-
-
-
-        this.view = gmap
-    }
-
-
-    showList() {
-        const listTemplate = document.querySelector("#card-list").content.cloneNode(true);
-        const itemList = document.querySelector("#card").content.cloneNode(true);
-        let list = listTemplate.querySelector('#magasinList');
-
-        /*   .forEach(elem => {
-              itemList.querySelector(".card-footer-title").innerHTML = elem.name
-              itemList.querySelector(".card-footer-address").innerHTML = elem.address_components.long_name
-              list.querySelector('.list-container').appendChild(itemList)
-          }); */
-
-        this.view = list
-    }
-
-    showFavorite() {
-
-    }
-
     selectView(elem) {
         elem.forEach(item => {
             item.addEventListener('click', e => {
@@ -64,12 +65,8 @@ export default class ViewManager {
                     this.showList()
                 } else if (e.target.dataset.view == "Map") {
                     this.showMap()
-                } else if (e.target.dataset.view == "Favoris") {
-                    this.showFavorite()
                 }
             })
         })
     }
 }
-
-console.log('veiw')

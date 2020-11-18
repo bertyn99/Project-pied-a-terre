@@ -9,7 +9,7 @@ export default class MapManager {
     }
 
 
-    loadScript(src) {
+    async loadScript(src) {
         return new Promise((resolve, reject) => {
             let script = document.createElement('script');
             script.src = src;
@@ -21,37 +21,25 @@ export default class MapManager {
     }
 
     async loadMap(center) {
-        const mapView = document.querySelector("#tempmap").content.cloneNode(true);
-        this.gmap = mapView.querySelector('#map');
+        this.gmap = document.querySelector('#map');
 
-        this.loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places").then(() => {
+        await this.loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places").then(() => {
             let infowindow = new google.maps.InfoWindow();
-            console.log(center)
             let point = new google.maps.LatLng(center.lat, center.lng);
-            this.gApi = new google.maps.Map(this.gmap, { zoom: 15, center: point });
+            this.gApi = new google.maps.Map(this.gmap, { zoom: 16, center: point });
             this.places = new google.maps.places.PlacesService(this.gApi);
+            this.bounds = new google.maps.LatLngBounds
 
-            /*this.bounds = new google.maps.LatLngBounds this.place(point).then((d) => {
-
-
-                this.store = d
-                d.forEach(store => {
-                    this.addMarker(store)
-                    this.centerMap()
-                });
+            this.showPlacesMarker(point)
 
 
-            }).catch((err) => {
-                console.error(err);
-            }) */
-            // The map, centered at Uluru
+        });
 
-        })
-        return this.gmap
 
     }
 
     addMarker(place) {
+
         let point = place.geometry.location
         const marker = new google.maps.Marker({
             map: this.gApi,
@@ -67,10 +55,11 @@ export default class MapManager {
 
     showPlacesMarker(point) {
         this.getPlace(point).then((d) => {
+            this.store = d
 
             d.forEach(store => {
                 this.addMarker(store)
-                this.centerMap()
+
             });
 
 
@@ -84,11 +73,11 @@ export default class MapManager {
 
         let request = {
             location: position,
-            radius: '600',
+            radius: '500',
             type: ['shoe_store']
         };
-
-        return new Promise((resolve, reject) => {
+        console.log(this.places)
+        return await new Promise((resolve, reject) => {
             this.places.nearbySearch(request, (dat, err) => {
                 if (dat) return resolve(dat)
 
@@ -96,18 +85,8 @@ export default class MapManager {
             });
         })
     }
-    async getStore(point) {
-        this.getPlace(point).then((d) => {
-
-
-            this.store = d
-
-            return this.store
-
-        }).catch((err) => {
-            console.error(err);
-        })
-
+    getStore(point) {
+        return this.store
     }
     centerMap() {
         this.gApi.panToBounds(this.bounds)

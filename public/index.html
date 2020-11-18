@@ -5,32 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="build/style.css">
-    <link rel="stylesheet" href="./build/main.css">
+    <link rel="stylesheet" href="build/main.css">
+
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
     <title>Pied à terre</title>
-
+    <script type="module" src="js/main.js"></script>
 </head>
 
 <body>
 
-
-    <div class="header">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <img src="./assets/pngtree-e-commerce-logo-template-image_311731.jpg" alt="logo" width="125px">
+    <header class="shadow">
+        <div class="header">
+            <div class="container">
+                <div class="navbar">
+                    <div class="logo"> <img src="./assets/pngtree-e-commerce-logo-template-image_311731.jpg" alt="logo"
+                            width="125px"> </div>
+                    <nav>
+                        <ul>
+                            <li><a data-view="Accueil" href="#">List</a></li>
+                            <li><a data-view="Map" href="#">Map</a></li>
+                        </ul>
+                    </nav>
                 </div>
-                <nav>
-                    <ul>
-                        <li><a data-view="Accueil" href="#">Home</a></li>
-                        <li><a data-view="Map" href="#">Map</a></li>
-                        <li><a data-view="About" href="#">About</a></li>
-                        <li><a data-view="favoris" href="#">Favoris</a></li>
-                    </ul>
-                </nav>
+                <!-- <div class="row"> mis en commentaire le temps que je finisse de faire les test des script <div class="col-2"> <h1>Some people need a high five<br>in the face with a chair.</h1> <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, tenetur.</p> <a href="#" class="btn">start your journey &#8594</a> </div> <div class="col-2"> <img src="./assets/slide1.png" alt=""> </div> </div> -->
             </div>
-            <!-- <div class="row"> mis en commentaire le temps que je finisse de faire les test des script
+        </div>
+    </header>
+    <!-- <div class="row"> mis en commentaire le temps que je finisse de faire les test des script
                 <div class="col-2">
                     <h1>Some people need a high five<br>in the face with a chair.</h1>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, tenetur.</p>
@@ -40,47 +42,53 @@
                     <img src="./assets/slide1.png" alt="">
                 </div>
             </div> -->
-        </div>
+    </div>
     </div>
     <section id="main">
+        <div id="tempmap" hidden>
+            <div id="map">
 
-
-    </section>
-
-    <template id="tempmap">
-        <div id="map">
-
+            </div>
         </div>
 
-    </template>
-    <template id="magasinView">
-
-    </template>
-    <template id="commentaires">
-
-    </template>
-    <template id="card-list">
-        <div id="magasinList">
+        <div id="magasinList" hidden>
             <div class="w-10/12 mx-auto">
-                <div class="list-container">
+                <div class="list-container p-2">
+                    <div class="bg-purple-600 h-24 flex rounded flex-row justify-evenly text-gray-700 font-bold py-8">
+                        <span class="">Nom de la boutique </span>
+                        <span class="">Distance </span>
+                        <span class="">Favoris </span>
+                        <span class="">Notes</span>
+                    </div>
+                    <div class="card-container">
+                        <span class="card-titre">Nom de la boutique </span>
+                        <span class="card-Distance">Distance </span>
+                        <span class="card-Favoris">Favoris </span>
+                        <span class="card-Note">Notes</span>
 
+                    </div>
                 </div>
             </div>
 
         </div>
-    </template>
+
+    </section>
+
     <template id="card">
         <div class="card-container">
-            <div class="card-header">
-                <div class="card-header-img"></div>
-            </div>
-            <div class="card-footer">
-                <div class="card-footer-title"></div>
-                <div class="card-footer-address"></div>
-            </div>
+
+            <div> <span class="card-Titre"> </span></div>
+            <div><span class="card-Distance"></span></div>
+            <div><span class="card-Favoris"> </span></div>
+            <div> <span class="card-Note"></span></div>
+        </div>
+
+
+
+
+        </div>
     </template>
 
-    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
