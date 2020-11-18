@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+body {
+    font-family: 'Poppins', sans-serif;
+
+}
 
 .navbar{
     display: flex;
@@ -22,6 +26,7 @@ nav ul {
 nav ul li {
     display: inline-block;
     margin-left: 20px;
+    font-size: 20px;
 }
 
 
@@ -68,14 +73,38 @@ p {
     padding: 8px 30px;
     margin: 30px;
     border-radius: 30px;
+    transition: background 0.5s;
+}
+.btn:hover {
+    background-color: #563434;;
 }
 
 .header {
     background: radial-gradient(#fff,#ffd6d6);
 }
 
+.header .row {
+    margin-top: 150px;
+}
+.categories {
+    margin: 70px 0;
+}
+.col-3 {
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+}
 
 
 
-
-
+.col-3 img {
+    width: 100%;
+}
+.small-container{
+    max-width: 1080px;
+    margin: auto;
+    padding: 0 25px;
+}
+.col-4{
+    
+}
