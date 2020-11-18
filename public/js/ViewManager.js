@@ -2,7 +2,6 @@ import MapManager from './MapManager.js'
 import Users from './Users.js'
 export default class ViewManager {
     constructor() {
-        this.magasins = [];
         this._viewContainer = document.querySelector("#main");
         this.map = new MapManager()
         this.user = new Users()
@@ -13,9 +12,11 @@ export default class ViewManager {
         this._viewContainer.appendChild(dom);
     }
 
-
-    showMap(elem) {
-        let gmap;
+    async init() {
+        await this.map.loadMap(this.user.position)
+        await console.log(this.map.getStore(this.user.position))
+    }
+    setPosition() {
         this.user.getLocalisation().then((position) => {
             this.user.position.lat = position.coords.latitude;
             this.user.position.lng = position.coords.longitude;
@@ -23,11 +24,16 @@ export default class ViewManager {
         })
             .catch((err) => {
                 //alert()
+                alert("Pour le fonctionnement du site activer votre géolocalistaion")
                 console.error(err.message);
             });
-        console.log(this.user.position)
-        gmap = this.map.loadMap(this.user.position)
-        this.map.centerMap()
+    }
+    showMap(elem) {
+
+        let gmap = this.map.gmap;
+
+
+
         this.view = gmap
     }
 
@@ -36,8 +42,13 @@ export default class ViewManager {
         const listTemplate = document.querySelector("#card-list").content.cloneNode(true);
         const itemList = document.querySelector("#card").content.cloneNode(true);
         let list = listTemplate.querySelector('#magasinList');
-        console.log(list.querySelector('.list-container'))
-        list.querySelector('.list-container').appendChild(itemList)
+
+        /*   .forEach(elem => {
+              itemList.querySelector(".card-footer-title").innerHTML = elem.name
+              itemList.querySelector(".card-footer-address").innerHTML = elem.address_components.long_name
+              list.querySelector('.list-container').appendChild(itemList)
+          }); */
+
         this.view = list
     }
 
