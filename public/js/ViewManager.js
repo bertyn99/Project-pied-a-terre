@@ -49,10 +49,7 @@ export default class ViewManager {
     }
     showList() {
         this.view = 1
-        console.log(this.map.store);
-
         this.favoriteSort()
-        console.log(this.map.store);
         let list = document.querySelector('.list-container');
         list.innerHTML = ""
 
@@ -82,33 +79,44 @@ export default class ViewManager {
                 if (s.place_id == elem) this.map.store.unshift(this.map.store.splice(i, 1)[0]);
 
             })
-
-
         })
     }
+
+    isFavoriteIcon(store) {
+        console.log(this.user.isFavorited(store.place_id))
+        let icon = this.user.isFavorited(store.place_id) ? "favoris-icon-liked" : "favoris-icon"
+        return icon
+    }
     async showStore(store) {
-        this.view = 3
+
         let details = await this.map.getStoreDetails(store)
+        this.view = 3
         const comList = document.querySelector(".commentaires-container")
         comList.innerHTML = ""
         document.querySelector(".magasin-name").textContent = store.name
         document.querySelector(".magasin-note").textContent = store.rrating ? `${store.rating}/5` : 'Pas de note'
-        document.querySelector(".favoris-icon").addEventListener('click', (e) => {
-            console.log(e.target);
+        document.querySelector(".favoris svg").removeAttribute("class")
+        console.log(document.querySelector(".favoris svg"))
 
-            if (e.target.classList.contains("favoris-icon")) {
-                e.target.classList.remove("favoris-icon")
-                e.target.classList.add("favoris-icon-liked")
+        document.querySelector(".favoris svg").classList.toggle(this.isFavoriteIcon(store));
+
+        document.querySelector(".favoris").addEventListener('click', (e) => {
+
+            if (e.target.classList.toggle("favoris-icon-liked")) {
+                e.target.classList.toggle("favoris-icon");
+
+
                 this.user.addFavoris(store.place_id)
             }
             else {
-                e.target.classList.remove("favoris-icon-liked")
-                e.target.classList.add("favoris-icon")
+                console.log('test')
+                e.target.classList.toggle("favoris-icon");
                 this.user.removeFavoris(store.place_id)
             }
 
 
         })
+
         details.reviews.forEach(elm => {
             const comItem = document.querySelector("#com").content.cloneNode(true)
             comItem.querySelector(".com-img").src = elm.profile_photo_url;

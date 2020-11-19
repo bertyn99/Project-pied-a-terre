@@ -10,6 +10,7 @@ export default class Users {
     }
     removeFavoris(magasin) {
         this.favoris.filter(item => item !== magasin)
+        console.log(this.favoris)
         localStorage.favoris = JSON.stringify(this.favoris)
     }
     addToStorage() {//ajout au local storage
