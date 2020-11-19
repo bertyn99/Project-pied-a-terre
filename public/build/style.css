@@ -21710,24 +21710,23 @@ video {
   margin: auto
 }
 
+.magasinDetails:md{
+  width: 50%;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-radius: 0.25rem
+}
+
 .magasinDetails{
-  width: 100%;
+  width: 100vw;
   --bg-opacity: 1;
   background-color: #edf2f7;
   background-color: rgba(237, 242, 247, var(--bg-opacity));
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column
-}
-
-.magasinDetails:md{
-  width:60rem;
   display: flex;
   flex-direction: column;
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem
+  border-radius: 0.25rem
 }
 
 .magasin-header{

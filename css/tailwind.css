@@ -44,13 +44,12 @@
 #map{
     @apply h-278 w-278 bg-gray-200 m-auto
 }
-
-.magasinDetails{
-     @apply  w-full bg-gray-200 mx-auto  w-full flex flex-col 
-}
 .magasinDetails:md{
-     @apply w-300 flex flex-col my-5
+   @apply w-6/12 my-5 rounded}
+.magasinDetails{
+     @apply  w-screen bg-gray-200 mx-auto flex flex-col rounded
 }
+
 .magasin-header{
     @apply h-32 w-full bg-purple-200
 }
