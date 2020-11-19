@@ -73,13 +73,13 @@
     @apply rounded h-24 py-1
 }
 .favoris-icon{
-    @apply fill-current text-black h-6 w-4 
+    @apply fill-current text-black h-6 w-4 mx-auto
 }
 .favoris-icon:hover{
     @apply fill-current text-red-400 h-6 w-4 
 }
 .favoris-icon-liked{
-    @apply fill-current text-red-400 h-4 w-4
+    @apply fill-current text-red-400 h-4 w-4 mx-auto
 }
 
 .com-img{

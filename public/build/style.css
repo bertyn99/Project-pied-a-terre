@@ -21777,7 +21777,9 @@ video {
   color: #000;
   color: rgba(0, 0, 0, var(--text-opacity));
   height: 1.5rem;
-  width: 1rem
+  width: 1rem;
+  margin-left: auto;
+  margin-right: auto
 }
 
 .favoris-icon:hover{
@@ -21795,7 +21797,9 @@ video {
   color: #fc8181;
   color: rgba(252, 129, 129, var(--text-opacity));
   height: 1rem;
-  width: 1rem
+  width: 1rem;
+  margin-left: auto;
+  margin-right: auto
 }
 
 .com-img{
