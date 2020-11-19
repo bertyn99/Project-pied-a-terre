@@ -9,7 +9,7 @@ export default class Users {
         localStorage.favoris = JSON.stringify(this.favoris)
     }
     removeFavoris(magasin) {
-        this.favoris.filter(item => item !== magasin)
+        this.favoris = this.favoris.filter(item => item !== magasin)
         console.log(this.favoris)
         localStorage.favoris = JSON.stringify(this.favoris)
     }

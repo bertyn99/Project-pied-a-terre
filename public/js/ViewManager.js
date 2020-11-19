@@ -41,8 +41,17 @@ export default class ViewManager {
         }
 
     }
-    showMap() {
+    async showMap() {
         this.view = 2
+        this.map.getPlace(this.map.point).then((d) => {
+            this.map.store = d;
+            this.user.addToStorage();
+            d.forEach(store => {
+                this.map.addMarker(store, this.user.isFavorited(store.place_id) ? "pink" : "red")
+            });
+        }).catch((err) => {
+            console.error(err);
+        })
         this.map.gmap.addEventListener('click', e => {
             this.showStore(this.map.click)
         }, { passive: true })
@@ -52,7 +61,7 @@ export default class ViewManager {
         this.favoriteSort()
         let list = document.querySelector('.list-container');
         list.innerHTML = ""
-
+        console.log(this.map.store)
         this.map.store.forEach((elem) => {
             const itemList = document.querySelector("#card").content.cloneNode(true);
             itemList.querySelector(".card-container").addEventListener('click', (e) => {
@@ -60,7 +69,7 @@ export default class ViewManager {
 
             })
             itemList.querySelector(".card-Titre").textContent = elem.name
-            itemList.querySelector(".card-Distance").textContent = 'non'
+            itemList.querySelector(".card-Distance").textContent = `${this.map.getDistanceBetweenPoint(this.user.position.lat, this.user.position.lng, elem.geometry.location.lat(), elem.geometry.location.lng())} M`
             if (this.user.isFavorited(elem.place_id)) {
                 itemList.querySelector(".card-Favoris svg").classList.remove("favoris-icon");
                 itemList.querySelector(".card-Favoris svg").classList.add("favoris-icon-liked");
@@ -130,7 +139,7 @@ export default class ViewManager {
         this.user.getLocalisation().then((position) => {
             this.user.position.lat = position.coords.latitude;
             this.user.position.lng = position.coords.longitude;
-            console.log(position)
+
         })
             .catch((err) => {
                 //alert()
