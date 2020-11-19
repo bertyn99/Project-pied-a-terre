@@ -4,12 +4,26 @@ export default class ViewManager {
     constructor() {
         this.map = new MapManager();
         this.user = new Users()
-        this.store = [];
+
     }
 
     async init() {
+        let navbarItem = document.querySelectorAll('li')
+        this.selectView(navbarItem)
+        this.setPosition()
         await this.map.loadMap(this.user.position)
+        this.map.getPlace(this.map.point).then((d) => {
+            this.map.store = d;
+            this.user.addToStorage();
+            d.forEach(store => {
+                this.map.addMarker(store, this.user.isFavorited(store.place_id) ? "pink" : "red")
+            });
+        }).catch((err) => {
+            console.error(err);
+        })
+
         this.showMap()
+
     }
     set view(nbr) {
         if (nbr == 1) {
@@ -34,6 +48,9 @@ export default class ViewManager {
     showList() {
         this.view = 1
         console.log(this.map.store);
+
+        this.favoriteSort()
+        console.log(this.map.store);
         let list = document.querySelector('.list-container');
         list.innerHTML = ""
 
@@ -45,23 +62,51 @@ export default class ViewManager {
             })
             itemList.querySelector(".card-Titre").textContent = elem.name
             itemList.querySelector(".card-Distance").textContent = 'non'
-            itemList.querySelector(".card-Favoris").textContent = 'non'
-            itemList.querySelector(".card-Note").textContent = `${elem.rating}/5`
+            if (this.user.isFavorited(elem.place_id)) {
+                itemList.querySelector(".card-Favoris svg").classList.remove("favoris-icon");
+                itemList.querySelector(".card-Favoris svg").classList.add("favoris-icon-liked");
+            }
+
+            itemList.querySelector(".card-Note").textContent = elem.rating ? `${elem.rating}/5` : 'Pas de note'
 
             list.appendChild(itemList)
         })
 
 
     }
+    favoriteSort(store) {
+        this.user.favoris.forEach(elem => {
+            this.map.store.forEach((s, i) => {
+                if (s.place_id == elem) this.map.store.unshift(this.map.store.splice(i, 1)[0]);
 
+            })
+
+
+        })
+    }
     async showStore(store) {
         this.view = 3
         let details = await this.map.getStoreDetails(store)
         const comList = document.querySelector(".commentaires-container")
         comList.innerHTML = ""
-        console.log(details.reviews)
         document.querySelector(".magasin-name").textContent = store.name
-        document.querySelector(".magasin-note").textContent = `${store.name}`
+        document.querySelector(".magasin-note").textContent = store.rrating ? `${store.rating}/5` : 'Pas de note'
+        document.querySelector(".favoris-icon").addEventListener('click', (e) => {
+            console.log(e.target);
+
+            if (e.target.classList.contains("favoris-icon")) {
+                e.target.classList.remove("favoris-icon")
+                e.target.classList.add("favoris-icon-liked")
+                this.user.addFavoris(store.place_id)
+            }
+            else {
+                e.target.classList.remove("favoris-icon-liked")
+                e.target.classList.add("favoris-icon")
+                this.user.removeFavoris(store.place_id)
+            }
+
+
+        })
         details.reviews.forEach(elm => {
             const comItem = document.querySelector("#com").content.cloneNode(true)
             comItem.querySelector(".com-img").src = elm.profile_photo_url;
