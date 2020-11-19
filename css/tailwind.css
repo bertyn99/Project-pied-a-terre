@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 @layer utilities {
+
   .h-278 {
     height: 36rem;
   }
   .w-278 {
       width:50rem;
+  }
+   .w-300{
+      width:60rem;
   }
 }
 .list-container{
@@ -34,4 +38,44 @@
 
 #map{
     @apply h-278 w-278 bg-gray-200 m-auto
+}
+
+.magasinDetails{
+     @apply  w-300 bg-gray-200 mx-auto my-5  flex flex-col 
+}
+.magasin-header{
+    @apply h-32 bg-purple-200
+}
+.commentaires{
+    @apply h-full bg-purple-700 py-2
+}
+
+.magasin-header{
+    @apply flex flex-row justify-evenly items-center
+}
+.magasin-name{
+    @apply 
+}
+.favoris{
+    @apply rounded h-24 py-1
+}
+.favoris-icon{
+    @apply fill-current text-black h-6 w-4 
+}
+.favoris-icon:hover{
+    @apply fill-current text-red-400 h-6 w-4 
+}
+.favoris-icon-liked{
+    @apply fill-current text-red-400 h-4 w-4
+}
+
+.com-img{
+    @apply rounded-full 
+}
+
+.com-body{
+    @apply text-lg
+}
+.com-date{
+    @apply text-gray-600 font-semibold
 }

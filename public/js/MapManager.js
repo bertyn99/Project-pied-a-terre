@@ -6,6 +6,7 @@ export default class MapManager {
         this.places = null
         this.bounds = null;
         this.store = [];
+        this.storeDet = []
     }
 
 
@@ -38,7 +39,7 @@ export default class MapManager {
 
     }
 
-    addMarker(place) {
+    async addMarker(place) {
 
         let point = place.geometry.location
         const marker = new google.maps.Marker({
@@ -46,6 +47,7 @@ export default class MapManager {
             position: point,
         });
         this.bounds.extend(point)
+
         google.maps.event.addListener(marker, "click", () => {
             infowindow.setContent(place.name);
             infowindow.open(this.gApi);
@@ -53,12 +55,12 @@ export default class MapManager {
 
     }
 
-    showPlacesMarker(point) {
+    async showPlacesMarker(point) {
         this.getPlace(point).then((d) => {
             this.store = d
-
             d.forEach(store => {
                 this.addMarker(store)
+
 
             });
 
@@ -76,7 +78,6 @@ export default class MapManager {
             radius: '500',
             type: ['shoe_store']
         };
-        console.log(this.places)
         return await new Promise((resolve, reject) => {
             this.places.nearbySearch(request, (dat, err) => {
                 if (dat) return resolve(dat)
@@ -85,8 +86,28 @@ export default class MapManager {
             });
         })
     }
-    getStore(point) {
-        return this.store
+
+    async getStoreDetails(place) {
+
+
+        return await new Promise((resolve, reject) => {
+            this.places.getDetails({ placeId: place.place_id }, (dat, err) => {
+                if (dat) return resolve(dat)
+
+                reject(err)
+            });
+        })
+
+    }
+    async getStore() {
+        this.store.forEach(sto => {
+            console.log(sto)
+            this.StoreDetails(sto).then(t => console.log(t)).catch((err) => {
+                console.error(err);
+            })
+
+        })
+
     }
     centerMap() {
         this.gApi.panToBounds(this.bounds)
