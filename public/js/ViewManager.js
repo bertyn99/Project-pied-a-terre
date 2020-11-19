@@ -1,5 +1,6 @@
 import MapManager from './MapManager.js';
 import Users from './Users.js'
+import Magasin from './Magasin.js'
 export default class ViewManager {
     constructor() {
         this.map = new MapManager();
@@ -13,15 +14,24 @@ export default class ViewManager {
         this.setPosition()
         await this.map.loadMap(this.user.position)
         this.map.getPlace(this.map.point).then((d) => {
-            this.map.store = d;
+
             this.user.addToStorage();
-            d.forEach(store => {
-                this.map.addMarker(store, this.user.isFavorited(store.place_id) ? "pink" : "red")
+            d.forEach(s => {
+                let storePosition = { lat: s.geometry.location.lat(), lng: s.geometry.location.lng() }
+                let distance = this.map.getDistance(this.user.position, storePosition)
+                this.map.store.push(new Magasin(s, distance));
+                this.map.addMarker(s, this.user.isFavorited(s.place_id) ? "pink" : "red")
             });
+            console.log(this.map.store)
+            this.map.store.sort(function compare(a, b) {
+                if (a.distance < b.distance) return -1;
+                if (a.distance > b.distance) return 1;
+                return 0;
+            });
+
         }).catch((err) => {
             console.error(err);
         })
-
         this.showMap()
 
     }
@@ -44,7 +54,7 @@ export default class ViewManager {
     async showMap() {
         this.view = 2
         this.map.getPlace(this.map.point).then((d) => {
-            this.map.store = d;
+
             this.user.addToStorage();
             d.forEach(store => {
                 this.map.addMarker(store, this.user.isFavorited(store.place_id) ? "pink" : "red")
@@ -58,10 +68,11 @@ export default class ViewManager {
     }
     showList() {
         this.view = 1
-        this.favoriteSort()
+        console.log(this.map.store)
         let list = document.querySelector('.list-container');
         list.innerHTML = ""
-        console.log(this.map.store)
+
+        this.favoriteSort()
         this.map.store.forEach((elem) => {
             const itemList = document.querySelector("#card").content.cloneNode(true);
             itemList.querySelector(".card-container").addEventListener('click', (e) => {
@@ -69,7 +80,7 @@ export default class ViewManager {
 
             })
             itemList.querySelector(".card-Titre").textContent = elem.name
-            itemList.querySelector(".card-Distance").textContent = `${this.map.getDistanceBetweenPoint(this.user.position.lat, this.user.position.lng, elem.geometry.location.lat(), elem.geometry.location.lng())} M`
+            itemList.querySelector(".card-Distance").textContent = `${elem.distance} M`
             if (this.user.isFavorited(elem.place_id)) {
                 itemList.querySelector(".card-Favoris svg").classList.remove("favoris-icon");
                 itemList.querySelector(".card-Favoris svg").classList.add("favoris-icon-liked");
@@ -82,6 +93,24 @@ export default class ViewManager {
 
 
     }
+
+    /*  distanceSort(tab) {
+         for (var i = 0; i < tab.length; i++) {
+             //stocker l'index de l'élément minimum
+             var min = i;
+             for (var j = i + 1; j < tab.length; j++) {
+                 if () {
+                     // mettre à jour l'index de l'élément minimum
+                     min = j;
+                 }
+             }
+             var tmp = tab[i];
+             tab[i] = tab[min];
+             tab[min] = tmp;
+         }
+         return tab;
+ 
+     } */
     favoriteSort(store) {
         this.user.favoris.forEach(elem => {
             this.map.store.forEach((s, i) => {
@@ -103,7 +132,7 @@ export default class ViewManager {
         const comList = document.querySelector(".commentaires-container")
         comList.innerHTML = ""
         document.querySelector(".magasin-name").textContent = store.name
-        document.querySelector(".magasin-note").textContent = store.rrating ? `${store.rating}/5` : 'Pas de note'
+        document.querySelector(".magasin-note").textContent = store.rating ? `${store.rating}/5` : 'Pas de note'
         document.querySelector(".favoris svg").removeAttribute("class")
         console.log(document.querySelector(".favoris svg"))
 

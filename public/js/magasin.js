@@ -1,34 +1,12 @@
-import Commentaire from "./Commentaire";
-module.exports = class Magasin {
-    constructor(nom, addresse) {
-        this.nom = nom;
-        this.addresse = addresse;
-        this.commentaire = []
+export default class Magasin {
+    constructor(place, distance) {
+        this.name = place.name;
+        this.place_id = place.place_id
+        this.rating = place.rating;
+        this.localisation = place.geometry;
+        this.distance = distance
     }
 
-    loadCommentaire() {
 
-    }
-
-    pinMagasin() {//pin du magasin sur la map
-
-    }
-
-    showMagasin() {
-
-    }
-
-    getDetails() {//recup les info du magasin par l'api google  et remplir les valeur de l'object
-        this.nom
-        this.addresse
-        this.commentaire
-    }
-
-    getMagasinItem() {
-        const item = document.querySelector("#card").content.cloneNode(true);
-        item.querySelector(".card-footer-title").textContent = this.nom;
-        item.querySelector(".card-footer-address").textContent = this.addresse;
-
-    }
 
 }
