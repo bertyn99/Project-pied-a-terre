@@ -6,10 +6,17 @@ export default class Users {
 
     addFavoris(magasin) {//ajout un magasin au favoris
         this.favoris.push(magasin)
+        localStorage.favoris = JSON.stringify(this.favoris)
     }
-
+    removeFavoris(magasin) {
+        this.favoris.filter(item => item !== magasin)
+        localStorage.favoris = JSON.stringify(this.favoris)
+    }
     addToStorage() {//ajout au local storage
-        localStorage.setItem('favoris', JSON.stringify(this.favoris));
+        this.getStorage();
+        if (this.favoris.length == 0) {
+            localStorage.setItem('favoris', JSON.stringify(this.favoris));
+        }
     }
     getLocalisation() {
         return new Promise((resolve, reject) => {
@@ -19,7 +26,9 @@ export default class Users {
             });
         });
     }
-
+    isFavorited(store) {
+        return this.favoris.includes(store)
+    }
     watchLocalisation() {// utilisateur se deplace
         return new Promise((resolve, reject) => {
             navigator.geolocation.watchPosition(resolve, reject, {
@@ -34,6 +43,9 @@ export default class Users {
     }
     getStorage() {
         let favorisString = localStorage.getItem("favoris");
-        this.favoris = JSON.parse(favorisString);
+        console.log(favorisString)
+        if (favorisString != null) this.favoris = JSON.parse(favorisString);
+
+
     }
 }
