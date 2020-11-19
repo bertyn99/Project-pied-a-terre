@@ -8,6 +8,7 @@ export default class MapManager {
         this.store = [];
         this.infowindow = null
         this.point = null
+        this.click = null
     }
 
 
@@ -54,10 +55,9 @@ export default class MapManager {
         this.bounds.extend(point)
 
         google.maps.event.addListener(marker, "click", () => {
-            console.log(place)
             this.infowindow.setContent(place.name);
             this.infowindow.open(this.gApi);
-
+            this.click = place
         });
 
     }

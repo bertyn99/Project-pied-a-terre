@@ -43,7 +43,9 @@ export default class ViewManager {
     }
     showMap() {
         this.view = 2
-
+        this.map.gmap.addEventListener('click', e => {
+            this.showStore(this.map.click)
+        }, { passive: true })
     }
     showList() {
         this.view = 1
