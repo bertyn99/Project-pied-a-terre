@@ -6,7 +6,8 @@ export default class MapManager {
         this.places = null
         this.bounds = null;
         this.store = [];
-        this.storeDet = []
+        this.infowindow = null
+        this.point = null
     }
 
 
@@ -25,13 +26,13 @@ export default class MapManager {
         this.gmap = document.querySelector('#map');
 
         await this.loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places").then(() => {
-            let infowindow = new google.maps.InfoWindow();
-            let point = new google.maps.LatLng(center.lat, center.lng);
-            this.gApi = new google.maps.Map(this.gmap, { zoom: 16, center: point });
+            this.infowindow = new google.maps.InfoWindow();
+            this.point = new google.maps.LatLng(center.lat, center.lng);
+            this.gApi = new google.maps.Map(this.gmap, { zoom: 16, center: this.point });
             this.places = new google.maps.places.PlacesService(this.gApi);
             this.bounds = new google.maps.LatLngBounds
 
-            this.showPlacesMarker(point)
+
 
 
         });
@@ -39,18 +40,24 @@ export default class MapManager {
 
     }
 
-    async addMarker(place) {
+    async addMarker(place, color) {
 
         let point = place.geometry.location
         const marker = new google.maps.Marker({
             map: this.gApi,
-            position: point,
+            position: place.geometry.location,
+            title: place.name,
+            icon: {
+                url: `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`
+            }
         });
         this.bounds.extend(point)
 
         google.maps.event.addListener(marker, "click", () => {
-            infowindow.setContent(place.name);
-            infowindow.open(this.gApi);
+            console.log(place)
+            this.infowindow.setContent(place.name);
+            this.infowindow.open(this.gApi);
+
         });
 
     }
@@ -59,7 +66,7 @@ export default class MapManager {
         this.getPlace(point).then((d) => {
             this.store = d
             d.forEach(store => {
-                this.addMarker(store)
+                this.addMarker(store, "yellow")
 
 
             });
