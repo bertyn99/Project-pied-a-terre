@@ -19,9 +19,14 @@
 }
 
 .card-container{
-    @apply h-24 w-full rounded shadow  overflow-hidden bg-purple-400 flex rounded flex-row text-gray-300 font-bold py-8
+    @apply h-24 w-full rounded shadow  overflow-hidden bg-purple-400 flex rounded flex-row text-gray-300 font-bold py-4
 }
-.
+.card-Titre:md{
+    @apply py-8
+}
+.card-Distance,.card-Favoris{
+    @apply mt-6
+}
 .card-Titre{
     @apply 
 }
@@ -41,10 +46,16 @@
 }
 
 .magasinDetails{
-     @apply  w-300 bg-gray-200 mx-auto my-5  flex flex-col 
+     @apply  w-full bg-gray-200 mx-auto  w-full flex flex-col 
+}
+.magasinDetails:md{
+     @apply w-300 flex flex-col my-5
 }
 .magasin-header{
-    @apply h-32 bg-purple-200
+    @apply h-32 w-full bg-purple-200
+}
+.magasin-header:md{
+    @apply h-32 
 }
 .commentaires{
     @apply h-full bg-purple-700 py-2
@@ -55,6 +66,9 @@
 }
 .magasin-name{
     @apply 
+}
+.magasin-note{
+    @apply hidden 
 }
 .favoris{
     @apply rounded h-24 py-1
@@ -70,7 +84,7 @@
 }
 
 .com-img{
-    @apply rounded-full 
+    @apply rounded-full mx-auto
 }
 
 .com-body{

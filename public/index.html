@@ -57,11 +57,11 @@
 
         <div id="magasinList" class="mt-5">
             <div class="w-10/12 mx-auto">
-                <div class="bg-purple-600 h-24 flex rounded flex-row text-center text-gray-700 font-bold py-8">
-                    <div class="w-6/12 "> <span class="">Nom de la boutique </span></div>
-                    <div class="w-2/12 "> <span class="">Distance </span></div>
-                    <div class="w-2/12 "> <span class="">Favoris </span></div>
-                    <div class="w-2/12 "> <span class="">Notes</span></div>
+                <div class="bg-purple-600 h-24 flex rounded flex-row text-center text-gray-700 font-bold py-8 px-1">
+                    <div class="w-6/12 md:w-6/12  "> <span class="">Nom de la boutique </span></div>
+                    <div class="w-4/12 md:w-2/12 "> <span class="">Distance </span></div>
+                    <div class="w-4/12 md:w-2/12 "> <span class="">Favoris </span></div>
+                    <div class="hidden md:w-2/12 "> <span class="">Notes</span></div>
                 </div>
                 <div class="list-container p-2">
 
@@ -92,10 +92,10 @@
     <template id="card">
         <div class="card-container text-center">
 
-            <div class="w-6/12 "> <span class="card-Titre"> </span></div>
-            <div class="w-2/12"><span class="card-Distance"></span></div>
-            <div class="w-2/12"><span class="card-Favoris"> </span></div>
-            <div class="w-2/12"> <span class="card-Note"></span></div>
+            <div class="w-6/12 md:w-6/12 "> <span class="card-Titre"> </span></div>
+            <div class="w-4/12 md:w-2/12"><span class="card-Distance"></span></div>
+            <div class="w-4/12 md:w-2/12"><span class="card-Favoris"> </span></div>
+            <div class="hidden md:w-2/12"> <span class="card-Note"></span></div>
         </div>
 
 
@@ -104,8 +104,8 @@
         </div>
     </template>
     <template id="com">
-        <div class="flex flex-col md:flex-row mb-4 bg-gray-200 m-2 p-1">
-            <div class="flex flex-col justify-center">
+        <div class="flex flex-col md:flex-row mb-4 bg-gray-200 m-2 p-1 rounded">
+            <div class="flex flex-col justify-center ">
                 <img class="com-img" src="" width="55" height="55" alt="">
             </div>
             <div class="flex flex-col w-full justify-between">
