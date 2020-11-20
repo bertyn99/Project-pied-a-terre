@@ -138,3 +138,17 @@ p {
     left: 50%;
     transform: translateX(-50%);
 }
+
+h4{
+    color: #555;
+    font-weight: normal;
+}
+
+.col-4 p{
+    font-size: 14px;
+
+}
+
+.rating .fa {
+    color: #ff523b;
+}
