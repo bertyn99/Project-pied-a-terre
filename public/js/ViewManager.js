@@ -127,7 +127,7 @@ export default class ViewManager {
         let icon = this.user.isFavorited(store.place_id) ? "favoris-icon-liked" : "favoris-icon"
         return icon
     }
-    async showStore(store) {
+    async showStore(store) {//gere le fonctionnement de la vue qui donne les commentaire des store 
 
         let details = await this.map.getStoreDetails(store)
         this.view = 3
@@ -136,22 +136,29 @@ export default class ViewManager {
         document.querySelector(".magasin-name").textContent = store.name
         document.querySelector(".magasin-note").textContent = store.rating ? `${store.rating}/5` : 'Pas de note'
         document.querySelector(".favoris svg").removeAttribute("class")
-        console.log(document.querySelector(".favoris svg"))
+        document.querySelector(".favoris svg").classList = ""
 
-        document.querySelector(".favoris svg").classList.toggle(this.isFavoriteIcon(store));
+        if (this.user.isFavorited(store.place_id)) {
+            document.querySelector(".favoris svg").classList.remove("favoris-icon");
+            document.querySelector(".favoris svg").classList.add("favoris-icon-liked");
+        } else {
+            document.querySelector(".favoris svg").classList.remove("favoris-icon-liked");
+            document.querySelector(".favoris svg").classList.add("favoris-icon");
+        }
 
         document.querySelector(".favoris").addEventListener('click', (e) => {
 
-            if (e.target.classList.toggle("favoris-icon-liked")) {
+            if (this.user.isFavorited(store.place_id)) {
+                e.target.classList.toggle("favoris-icon-liked");
                 e.target.classList.toggle("favoris-icon");
-
-
-                this.user.addFavoris(store.place_id)
+                console.log('retirer des favoris')
+                this.user.removeFavoris(store.place_id)
             }
             else {
-                console.log('test')
+                console.log('ajouter des favoris')
                 e.target.classList.toggle("favoris-icon");
-                this.user.removeFavoris(store.place_id)
+                e.target.classList.toggle("favoris-icon-liked");
+                this.user.addFavoris(store.place_id)
             }
 
 
@@ -166,17 +173,27 @@ export default class ViewManager {
         })
 
     }
-    setPosition() {
-        this.user.getLocalisation().then((position) => {
-            this.user.position.lat = position.coords.latitude;
-            this.user.position.lng = position.coords.longitude;
+    setPosition() { //donne la position de l'utilisateur
+        if (navigator.geolocation) {
+            this.user.getLocalisation().then((position) => {
+                this.user.position.lat = position.coords.latitude;
+                this.user.position.lng = position.coords.longitude;
 
-        })
-            .catch((err) => {
-                //alert()
-                alert("Pour le fonctionnement du site activer votre géolocalistaion")
-                console.error(err.message);
-            });
+            })
+                .catch((err) => {
+                    //alert()
+                    alert("Geolocation is not enabled. Please enable to use this feature")
+                    while (this.user.position.lat == 0 && this.user.position.lng == 0) {
+                        this.setPosition()
+                    }
+
+                    console.error(err.message);
+                });
+        } else {
+
+            alert('Geolocation is not supported by this device')
+        }
+
     }
     selectView(elem) {
         elem.forEach(item => {
