@@ -69,7 +69,7 @@ export default class MapManager {
 
         let request = {
             location: position,
-            radius: '500',
+            radius: '3000',
             type: ['shoe_store']
         };
         return await new Promise((resolve, reject) => {

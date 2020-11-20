@@ -72,6 +72,9 @@
 .favoris{
     @apply rounded h-24 py-1
 }
+.favoris:focus{
+    @apply outline-none
+}
 .favoris-icon{
     @apply fill-current text-black h-6 w-4 mx-auto
 }

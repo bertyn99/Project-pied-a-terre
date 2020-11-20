@@ -12,30 +12,33 @@ export default class ViewManager {
         let navbarItem = document.querySelectorAll('li')
         this.selectView(navbarItem)
         this.setPosition()
+
         await this.map.loadMap(this.user.position)
-        this.map.getPlace(this.map.point).then((d) => {
+        setTimeout(() => {
+            this.map.getPlace(this.map.point).then((d) => {
 
-            this.user.addToStorage();
-            d.forEach(s => {
-                let storePosition = { lat: s.geometry.location.lat(), lng: s.geometry.location.lng() }
-                let distance = this.map.getDistance(this.user.position, storePosition)
-                this.map.store.push(new Magasin(s, distance));
-                this.map.addMarker(s, this.user.isFavorited(s.place_id) ? "pink" : "red")
-            });
-            console.log(this.map.store)
-            this.map.store.sort(function compare(a, b) {
-                if (a.distance < b.distance) return -1;
-                if (a.distance > b.distance) return 1;
-                return 0;
-            });
+                this.user.addToStorage();
+                d.forEach(s => {
+                    let storePosition = { lat: s.geometry.location.lat(), lng: s.geometry.location.lng() }
+                    let distance = this.map.getDistance(this.user.position, storePosition)
+                    this.map.store.push(new Magasin(s, distance));
+                    this.map.addMarker(s, this.user.isFavorited(s.place_id) ? "pink" : "red")
+                });
 
-        }).catch((err) => {
-            console.error(err);
-        })
-        this.showMap()
+                this.map.store.sort(function compare(a, b) {
+                    if (a.distance < b.distance) return -1;
+                    if (a.distance > b.distance) return 1;
+                    return 0;
+                });
+            }).catch((err) => {
+                console.error(err);
+            })
+            this.showMap()
+        }, 1000);
+
 
     }
-    set view(nbr) {
+    set view(nbr) {// gerer l'affichage des vue
         if (nbr == 1) {
             document.querySelector("#tempmap").hidden = true
             document.querySelector("#magasinList").hidden = false
@@ -44,14 +47,16 @@ export default class ViewManager {
             document.querySelector("#tempmap").hidden = false
             document.querySelector("#magasinList").hidden = true
             document.querySelector(".magasinDetails").hidden = true
+            document.querySelector("#cont").hidden = true
         } else if (nbr == 3) {
             document.querySelector("#tempmap").hidden = true
             document.querySelector("#magasinList").hidden = true
             document.querySelector(".magasinDetails").hidden = false
+            document.querySelector("#cont").hidden = true
         }
 
     }
-    async showMap() {
+    async showMap() {//gere la vue map
         this.view = 2
         this.map.getPlace(this.map.point).then((d) => {
 
@@ -66,7 +71,7 @@ export default class ViewManager {
             this.showStore(this.map.click)
         }, { passive: true })
     }
-    showList() {
+    showList() {//gere la vue list de magasin
         this.view = 1
         console.log(this.map.store)
         let list = document.querySelector('.list-container');
@@ -180,7 +185,7 @@ export default class ViewManager {
         elem.forEach(item => {
             item.addEventListener('click', e => {
                 console.log(e.target.dataset.view)
-                if (e.target.dataset.view == "Accueil") {
+                if (e.target.dataset.view == "Store") {
                     this.showList()
                 } else if (e.target.dataset.view == "Map") {
                     this.showMap()

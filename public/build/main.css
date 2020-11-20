@@ -170,3 +170,7 @@ col-2 .offer-img {
 small {
     color: #555;
 }
+
+[hidden]{
+    display: none;
+}
