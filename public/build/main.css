@@ -102,3 +102,20 @@ p {
     padding: 25px 0px; 
 }
 
+.col-4 {
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+}
+
+.small-container h2 {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 60px;
+    margin: 25px 0;
+}
+.col-4 img {
+    width: 100%;
+    
+}
