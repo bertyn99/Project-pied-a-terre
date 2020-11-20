@@ -84,9 +84,6 @@ p {
 }
 
 .header .row {
-    margin-top: 150px;
-}
-.categories {
     margin: 70px 0;
 }
 .col-3 {
@@ -95,20 +92,13 @@ p {
     margin-bottom: 30px;
 }
 
-
-
 .col-3 img {
     width: 100%;
 }
-.small-container{
+
+.small-container {
     max-width: 1080px;
     margin: auto;
-    padding: 0 25px;
-}
-.col-4{
-    
+    padding: 25px 0px; 
 }
 
-[hidden]{
-  display:none;
-}
