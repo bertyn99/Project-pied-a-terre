@@ -76,13 +76,13 @@
     @apply outline-none
 }
 .favoris-icon{
-    @apply fill-current text-black h-6 w-4 mx-auto
+    @apply fill-current text-black h-6 w-4 mx-3
 }
 .favoris-icon:hover{
     @apply fill-current text-red-400 h-6 w-4 
 }
 .favoris-icon-liked{
-    @apply fill-current text-red-400 h-4 w-4 mx-auto
+    @apply fill-current text-red-400 h-4 w-4 mx-3
 }
 
 .com-img{

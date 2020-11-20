@@ -26,7 +26,7 @@ export default class MapManager {
     async loadMap(center) {
         this.gmap = document.querySelector('#map');
 
-        await this.loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyATn1epFBc_nwv_JmtbfS2HASUDX6Tt2TQ&libraries=places").then(() => {
+        await this.loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCwdTXnhfVbmBeIgu_E87d3Hba1KJLSQIM&libraries=places").then(() => {
             this.infowindow = new google.maps.InfoWindow();
             this.point = new google.maps.LatLng(center.lat, center.lng);
             this.gApi = new google.maps.Map(this.gmap, { zoom: 16, center: this.point });

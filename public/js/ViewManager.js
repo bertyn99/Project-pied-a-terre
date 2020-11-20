@@ -135,29 +135,28 @@ export default class ViewManager {
         comList.innerHTML = ""
         document.querySelector(".magasin-name").textContent = store.name
         document.querySelector(".magasin-note").textContent = store.rating ? `${store.rating}/5` : 'Pas de note'
-        document.querySelector(".favoris svg").removeAttribute("class")
-        document.querySelector(".favoris svg").classList = ""
+        document.querySelector(".favoris svg").setAttribute("class", "")
 
         if (this.user.isFavorited(store.place_id)) {
-            document.querySelector(".favoris svg").classList.remove("favoris-icon");
-            document.querySelector(".favoris svg").classList.add("favoris-icon-liked");
+
+            document.querySelector(".favoris svg").setAttribute("class", "favoris-icon-liked")
         } else {
-            document.querySelector(".favoris svg").classList.remove("favoris-icon-liked");
-            document.querySelector(".favoris svg").classList.add("favoris-icon");
+
+            document.querySelector(".favoris svg").setAttribute("class", "favoris-icon")
+            /* document.querySelector(".favoris svg").classList.remove("favoris-icon-liked");
+            document.querySelector(".favoris svg").classList.add("favoris-icon"); */
         }
 
         document.querySelector(".favoris").addEventListener('click', (e) => {
 
             if (this.user.isFavorited(store.place_id)) {
-                e.target.classList.toggle("favoris-icon-liked");
-                e.target.classList.toggle("favoris-icon");
+                document.querySelector(".favoris svg").setAttribute("class", "favoris-icon")
                 console.log('retirer des favoris')
                 this.user.removeFavoris(store.place_id)
             }
             else {
                 console.log('ajouter des favoris')
-                e.target.classList.toggle("favoris-icon");
-                e.target.classList.toggle("favoris-icon-liked");
+                document.querySelector(".favoris svg").setAttribute("class", "favoris-icon-liked")
                 this.user.addFavoris(store.place_id)
             }
 
