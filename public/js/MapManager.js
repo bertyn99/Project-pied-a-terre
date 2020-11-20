@@ -59,6 +59,7 @@ export default class MapManager {
             this.infowindow.open(this.gApi);
             this.click = place
         });
+        this.centerMap()
 
     }
 
@@ -97,7 +98,7 @@ export default class MapManager {
 
 
 
-    async getStoreDetails(place) {
+    async getStoreDetails(place) {//retourne les details d'un magasin
 
 
         return await new Promise((resolve, reject) => {
@@ -119,7 +120,7 @@ export default class MapManager {
         })
 
     }
-    centerMap() {
+    centerMap() {//centre la map atour des points
         this.gApi.panToBounds(this.bounds)
         this.gApi.fitBounds(this.bounds)
     }

@@ -14,29 +14,26 @@ export default class ViewManager {
         this.setPosition()
 
         await this.map.loadMap(this.user.position)
-        setTimeout(() => {
-            this.map.getPlace(this.map.point).then((d) => {
 
-                this.user.addToStorage();
-                d.forEach(s => {
-                    let storePosition = { lat: s.geometry.location.lat(), lng: s.geometry.location.lng() }
-                    let distance = this.map.getDistance(this.user.position, storePosition)
-                    this.map.store.push(new Magasin(s, distance));
-                    this.map.addMarker(s, this.user.isFavorited(s.place_id) ? "pink" : "red")
-                });
+        this.map.getPlace(this.map.point).then((d) => {
 
-                this.map.store.sort(function compare(a, b) {
-                    if (a.distance < b.distance) return -1;
-                    if (a.distance > b.distance) return 1;
-                    return 0;
-                });
-            }).catch((err) => {
-                console.error(err);
-            })
-            this.showMap()
-        }, 1000);
+            this.user.addToStorage();
+            d.forEach(s => {
+                let storePosition = { lat: s.geometry.location.lat(), lng: s.geometry.location.lng() }
+                let distance = this.map.getDistance(this.user.position, storePosition)
+                this.map.store.push(new Magasin(s, distance));
+                this.map.addMarker(s, this.user.isFavorited(s.place_id) ? "pink" : "red")
+            });
 
-
+            this.map.store.sort(function compare(a, b) {
+                if (a.distance < b.distance) return -1;
+                if (a.distance > b.distance) return 1;
+                return 0;
+            });
+        }).catch((err) => {
+            console.error(err);
+        })
+        this.showMap()
     }
     set view(nbr) {// gerer l'affichage des vue
         if (nbr == 1) {
